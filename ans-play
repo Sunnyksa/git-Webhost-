@@ -1,0 +1,16 @@
+---
+- name: Host a Web Page on Amazon Linux
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Copy HTML files to Apache document root
+      copy:
+        src: /var/www/html/index.html  # Specify the path to your HTML file
+        dest: /var/www/html/index.html          # Apache document root on Amazon Linux
+
+    - name: Ensure Apache service is running
+      service:
+        name: httpd
+        state: started
+        enabled: yes
